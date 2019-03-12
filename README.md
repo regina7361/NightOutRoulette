@@ -14,7 +14,7 @@ Upon clicking on spin, an option will be randomly selected.
 Once the option is selected, we will display a list of locations for the users to go.
 
 Potentional additions:
-Add Lyft API pricing and time to get to location
-Add Fandango API for list of movie showings
+1. Add Lyft API pricing and time to get to location
+2. Add Fandango API for list of movie showings
 
 ![alt text](https://github.com/regina7361/NightOutRoulette/blob/master/assets/images/Screen%20Shot%202019-03-11%20at%208.41.00%20PM.png)
