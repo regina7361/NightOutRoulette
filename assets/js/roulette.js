@@ -1,4 +1,5 @@
-var options = ["$100", "$10", "$25", "$250", "$30", "$1000", "$1", "$200", "$45", "$500", "$5", "$20", "Lose", "$1000000", "Lose", "$350", "$5", "$99"];
+//Family Night Out Options:
+var options = ["Movies", "Pizza \nNight", "Drive-in Theater", "Night Swapmeet", "RollerSkating", "Mini golf", "Ice Cream", "Arcades", "Amusement Park", "Karaoke"];
 
 var startAngle = 0;
 var arc = Math.PI / (options.length / 2);
@@ -22,14 +23,14 @@ function RGB2Color(r,g,b) {
 }
 
 function getColor(item, maxitem) {
-  var phase = 0;
-  var center = 128;
-  var width = 127;
+  var phase = 0;////////////These affect the hue and stuff like that of the colors in the wheel
+  var center = 128;////////
+  var width = 127;/////////
   var frequency = Math.PI*2/maxitem;
   
-  red   = Math.sin(frequency*item+2+phase) * width + center;
-  green = Math.sin(frequency*item+0+phase) * width + center;
-  blue  = Math.sin(frequency*item+4+phase) * width + center;
+  red   = Math.sin(frequency*item+2+phase) * width + center;//The 2, 0, and 4 affect the colors of the wheel
+  green = Math.sin(frequency*item+0+phase) * width + center;//
+  blue  = Math.sin(frequency*item+4+phase) * width + center;//
   
   return RGB2Color(red,green,blue);
 }
@@ -37,17 +38,17 @@ function getColor(item, maxitem) {
 function drawRouletteWheel() {
   var canvas = document.getElementById("canvas");
   if (canvas.getContext) {
-    var outsideRadius = 200;
-    var textRadius = 160;
-    var insideRadius = 125;
+    var outsideRadius = 240;//////////Makes outside wheel radius bigger if number increases
+    var textRadius = 160;/////////////Makes Text move towards the exterior the higher the number
+    var insideRadius = 100;///////////Makes inside radius bigger if number decreases
 
     ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,500,500);
 
-    ctx.strokeStyle = "black";
-    ctx.lineWidth = 2;
+    ctx.strokeStyle = "grey";//////////This is the color of the Outline
+    ctx.lineWidth = 5;////////////////This is the width of the outside,inside and one line of the radius.
 
-    ctx.font = 'bold 12px Helvetica, Arial';
+    ctx.font = 'bold 12px Helvetica, Arial';///////This is the style for the font in the wheel
 
     for(var i = 0; i < options.length; i++) {
       var angle = startAngle + i * arc;
@@ -63,9 +64,9 @@ function drawRouletteWheel() {
       ctx.save();
       ctx.shadowOffsetX = -1;
       ctx.shadowOffsetY = -1;
-      ctx.shadowBlur    = 0;
-      ctx.shadowColor   = "rgb(220,220,220)";
-      ctx.fillStyle = "black";
+      ctx.shadowBlur    = 0; /////////////////////////////////////This affects how sparse the shadow is. So the more negative the number the bolder it will become.
+      ctx.shadowColor   = "rgb(220,220,220)"; ////////////////////This is the shadow color of the fonts in the wheel.
+      ctx.fillStyle = "black";///////////////////////////////////font in wheel color.
       ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 
                     250 + Math.sin(angle + arc / 2) * textRadius);
       ctx.rotate(angle + arc / 2 + Math.PI / 2);
@@ -75,7 +76,7 @@ function drawRouletteWheel() {
     } 
 
     //Arrow
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "rgb(146, 146, 146)";///////////Arrow color
     ctx.beginPath();
     ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
     ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
@@ -92,7 +93,7 @@ function drawRouletteWheel() {
 function spin() {
   spinAngleStart = Math.random() * 10 + 10;
   spinTime = 0;
-  spinTimeTotal = Math.random() * 3 + 4 * 1000;
+  spinTimeTotal = Math.random() * 3 + 4 * 1300;//////////If want to change the time of the spin then change the last number on this line.
   rotateWheel();
 }
 
@@ -114,7 +115,7 @@ function stopRotateWheel() {
   var arcd = arc * 180 / Math.PI;
   var index = Math.floor((360 - degrees % 360) / arcd);
   ctx.save();
-  ctx.font = 'bold 30px Helvetica, Arial';
+  ctx.font = 'bold 30px Helvetica, Arial';/////////////////////Font style of the results that appear in the middle of wheel
   var text = options[index]
   ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
   ctx.restore();
