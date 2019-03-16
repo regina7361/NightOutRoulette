@@ -1,4 +1,6 @@
-////////////////////////////////////////////////VARIABLES///////////////////////////////////////////////
+
+var options = ["movies", "pizza night", "drive-in", "swapmeet", "mini-golf", "roller skating", "ice cream", "arcades", "amusement park", "karaoke"];
+
 var startAngle = 0;
 var arc = Math.PI / (options.length / 2);
 var spinTimeout = null;
@@ -8,20 +10,18 @@ var spinTime = 0;
 var spinTimeTotal = 0;
 var placeholder;
 var ctx;
-////////////////////////////////////////////////ARRAYS///////////////////////////////////////////////
-var options = ["movies", "pizza night", "drive-in", "swapmeet", "mini-golf", "roller skating", "ice cream", "arcades", "amusement park", "karaoke"];
-////////////////////////////////////////////////FUNCTIONS///////////////////////////////////////////////
+
 document.getElementById("spin").addEventListener("click", spin);
-//-------------------------------------------------------------------------------------------------------------
+
 function byte2Hex(n) {
   var nybHexString = "0123456789ABCDEF";
   return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
 }
-//-------------------------------------------------------------------------------------------------------------
+
 function RGB2Color(r,g,b) {
 	return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
 }
-//-------------------------------------------------------------------------------------------------------------
+
 function getColor(item, maxitem) {
   var phase = 0;
   var center = 128;
@@ -34,7 +34,6 @@ function getColor(item, maxitem) {
   
   return RGB2Color(red,green,blue);
 }
-//-------------------------------------------------------------------------------------------------------------
 function drawRouletteWheel() {
   var canvas = document.getElementById("canvas");
   if (canvas.getContext) {
@@ -89,14 +88,14 @@ function drawRouletteWheel() {
     ctx.fill();
   }
 }
-//-------------------------------------------------------------------------------------------------------------
+
 function spin() {
   spinAngleStart = Math.random() * 10 + 10;
   spinTime = 0;
   spinTimeTotal = Math.random() * 3 + 4 * 1000;
   rotateWheel();
 }
-//-------------------------------------------------------------------------------------------------------------
+
 function rotateWheel() {
   spinTime += 30;
   if(spinTime >= spinTimeTotal) {
@@ -108,7 +107,7 @@ function rotateWheel() {
   drawRouletteWheel();
   spinTimeout = setTimeout('rotateWheel()', 30);
 }
-//-------------------------------------------------------------------------------------------------------------
+
 function stopRotateWheel() {
   clearTimeout(spinTimeout);
   var degrees = startAngle * 180 / Math.PI + 90;
@@ -120,15 +119,17 @@ function stopRotateWheel() {
   ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
   ctx.restore();
 
-//-------------------------------------------------------------------------AJAX CODE AND DISPLAY
-//VARIABLES
+
+
   var city= "riverside"+",";
   var state="ca";
   var area="location=" + city+state;
   var catagory="bowling";
   var term="term="+ text;
   console.log(area, term);
-//AJAX CALL
+
+
+
   queryURL = "https://yelp-test-beast-coders.herokuapp.com/business/search/" + area + "&" + term;
   console.log(queryURL);
 var apiKey="OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0mU70rj0KZ0ptxv3vE2wqUMCt2ID_wjXTFF1Tamrd6ASEdFJM5p1v2LCCHXHYx"
@@ -148,12 +149,19 @@ var apiKey="OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0m
     .then(function(response){
       console.log(response);
     }); 
+
+
+
+
+
+
+
 }
-//-------------------------------------------------------------------------------------------------------------
+
 function easeOut(t, b, c, d) {
   var ts = (t/=d)*t;
   var tc = ts*t;
   return b+c*(tc + -3*ts + 3*t);
 }
-//-------------------------------------------------------------------------------------------------------------
+
 drawRouletteWheel();
