@@ -1,6 +1,15 @@
 
+////////////////////////////////////////////////////////OUR VARIABLES AND ARRAYS//////////////////////////////////
 var options = ["movies", "pizza night", "drive-in", "swapmeet", "mini-golf", "roller skating", "ice cream", "arcades", "amusement park", "karaoke"];
-
+var resultName;
+var resultImageURL;
+var resultAddressLine1;
+var resultAddressLine2;
+var resultPhone;
+var resultRating;
+var resultURL;
+var resulttext;
+////////////////////////////////////////////////////////ROULETTE CODE//////////////////////////////////
 var startAngle = 0;
 var arc = Math.PI / (options.length / 2);
 var spinTimeout = null;
@@ -34,6 +43,7 @@ function getColor(item, maxitem) {
   
   return RGB2Color(red,green,blue);
 }
+
 function drawRouletteWheel() {
   var canvas = document.getElementById("canvas");
   if (canvas.getContext) {
@@ -73,7 +83,7 @@ function drawRouletteWheel() {
       ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
       ctx.restore();
     } 
-
+    
     //Arrow
     ctx.fillStyle = "black";
     ctx.beginPath();
@@ -118,21 +128,15 @@ function stopRotateWheel() {
   var text = options[index];
   ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
   ctx.restore();
-
-
-
+  ////////////////////////////////////////////////////////OUR CODE//////////////////////////////////////////
+  //---------------------------------------------------------------------------------------------VARIABLES
   var city= "riverside"+",";
   var state="ca";
   var area="location=" + city+state;
-  var catagory="bowling";
   var term="term="+ text;
-  console.log(area, term);
-
-
-
+  //---------------------------------------------------------------------------------------------AJAX CALL
   queryURL = "https://yelp-test-beast-coders.herokuapp.com/business/search/" + area + "&" + term;
-  console.log(queryURL);
-var apiKey="OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0mU70rj0KZ0ptxv3vE2wqUMCt2ID_wjXTFF1Tamrd6ASEdFJM5p1v2LCCHXHYx"
+  var apiKey="OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0mU70rj0KZ0ptxv3vE2wqUMCt2ID_wjXTFF1Tamrd6ASEdFJM5p1v2LCCHXHYx"
     $.ajax({
       url: queryURL,
       dataType: 'json',
@@ -142,20 +146,10 @@ var apiKey="OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0m
     },
       method: 'GET',
       dataType: 'json',
-      success: function(data){
-        console.log('success: '+ data);
-      }
     })
     .then(function(response){
-      console.log(response);
+      displayResults(response);
     }); 
-
-
-
-
-
-
-
 }
 
 function easeOut(t, b, c, d) {
@@ -165,3 +159,39 @@ function easeOut(t, b, c, d) {
 }
 
 drawRouletteWheel();
+//---------------------------------------------------------------------------------------------DISPLAY RESULTS
+function displayResults(results){
+  $("#results").empty();
+ console.log("YOU ARE IN DISPLAY RESULTS", results);
+ resulttext=$("<p>").text("HERE ARE YOUR RESULTS");
+    $("#results").append(resulttext);
+ for (i=0; i<5; i++){
+      resulttext=$("<p>").text("OPTION "+(i+1));
+      $("#results").append(resulttext);
+    resultName=results.businesses[i].name;
+      resulttext=$("<p>").text("Name of the place: "+resultName);
+      $("#results").append(resulttext);
+    resultImageURL=results.businesses[i].image_url;
+      resulttext=$("<img>");
+      resulttext.attr("src", resultImageURL);
+      resulttext.attr("alt", "image");
+      $("#results").append(resulttext);
+    resultAddressLine1=results.businesses[i].location.display_address[0];
+      resulttext=$("<p>").text("Address: "+resultAddressLine1);
+      $("#results").append(resulttext);
+    resultAddressLine2=results.businesses[i].location.display_address[1];
+      resulttext=$("<p>").text("Address: "+resultAddressLine2);
+      $("#results").append(resulttext);
+    resultPhone=results.businesses[i].phone;
+      resulttext=$("<p>").text("Phone Number: "+resultPhone);
+      $("#results").append(resulttext);
+    resultRating=results.businesses[i].rating;
+      resulttext=$("<p>").text("Rating: "+resultRating+"/5");
+      $("#results").append(resulttext);
+    resultURL=results.businesses[i].url;
+      resulttext=$("<p>").text("Link to their website: "+resultURL);
+      $("#results").append(resulttext);
+      resulttext=$("<p>").text("");
+      $("#results").append(resulttext);
+ };
+}
