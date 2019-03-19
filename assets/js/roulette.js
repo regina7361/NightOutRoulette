@@ -166,7 +166,7 @@ function displayResults(results){
  resulttext=$("<p>").text("HERE ARE YOUR RESULTS");
     $("#results").append(resulttext);
  for (i=0; i<5; i++){
-      resulttext=$("<p>").text("OPTION "+i);
+      resulttext=$("<p>").text("OPTION "+(i+1));
       $("#results").append(resulttext);
     resultName=results.businesses[i].name;
       resulttext=$("<p>").text("Name of the place: "+resultName);
