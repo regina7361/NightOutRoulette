@@ -1,5 +1,43 @@
+body {
+    
+}
+
+.chillpage {
+    background: #ffffff url("../images/knitting.jpg") no-repeat right top;
+    /*background-image: url("../images/girlredballoon.jpg");
+    background-size: cover;*/
+}
+
+.colleaguepage {
+    background: #ffffff url("../images/guyinoffice.png") no-repeat right top;
+}
+
+.couplespage {
+    background: #ffffff url("../images/champagne.jpg") no-repeat right top;
+}
+
+.datepage {
+    background: #ffffff url("../images/animatedwomanwithballoons.jpg") no-repeat right top;
+}
+
+.familypage {
+    background: #ffffff8a url("../images/animatedcarnival.png") no-repeat;
+    background-size: cover;
+}
+
+.friendspage {
+    background: #ffffff url("../images/guybeer.png") no-repeat right top;
+}
+
+/*.otherpages {
+    background: #ffffff url("../images/up-balloons.png") no-repeat right top;
+    
+    margin-right: 0px;
+    
+  }*/
+
 nav {
-    border-bottom: 1px solid gray;
+    border-bottom: 1px solid rgb(173, 172, 172);
 }
 
 .navbar {
@@ -83,3 +121,39 @@ h1, h2, h3 {
     background: gainsboro;
     text-align: center;
 }
+
+.navbar-brand {
+    font-size: 40px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.nav-link {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#navbar {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+/*
+.results {
+    opacity: 0.3;
+
+ }
+
+ #results {
+     color: black;
+ }
+ 
+ #spin {
+   margin-left: 10px;
+ }
+ 
+ .btn {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-top: 10px;
+    margin-left: 20px;
+ }*/

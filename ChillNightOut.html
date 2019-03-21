@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     
 </head>
-<body onLoad="setArrayChillNight();">
+<body onLoad="setArrayChillNight();" class="chillpage">
         <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="#">Night Out</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,16 +40,27 @@
                 </div>
             </nav>
             <br>
-    <form data-alert="You must provide:" action="" method="post">
-        <input type="text" id="city" data-alert="City Name" placeholder="Enter City Here" onkeypress="return (event.charCode > 64 && 
-        event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"/>
-        <input type="text" id="state" data-alert="State Name" placeholder="Enter State Here" onkeypress="return (event.charCode > 64 && 
-        event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"/>
-        <input type="submit" value="Submit" />
-    </form>
-    <input type="button" value="spin" style="float:left;" id='spin' />
-    <canvas id="canvas" width="500" height="500"></canvas>
-    <div id="results"></div>
-    <script src="assets/js/roulette.js"></script>
+    
+                          <!-- LUPE'S STUFF -->
+   <div class="row">
+      <div class="col-6">
+         <form data-alert="You must provide:" action="" method="post">
+             <input type="text" id="one" data-alert="City Name" placeholder="Enter City Here" />
+             <input type="text" id="two" data-alert="State Name" placeholder="Enter State Here" />
+             <input type="submit" value="Submit" />
+         </form>
+        <input type="button" class="btn btn-secondary" value="spin" style="float:left;" id='spin' />
+        <canvas id="canvas" width="500" height="500"></canvas>
+        <!--style="width:600px;"-->
+      </div>
+  <div class="results col-6">
+  <div id="results"></div>
+  </div>
+  </div>
+   <script src="assets/js/roulette.js"></script>
 </body>
 </html>
+
+
+
+
