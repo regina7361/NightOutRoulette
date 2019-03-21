@@ -3,17 +3,17 @@ body {
 }
 
 .chillpage {
-    background: #ffffff url("../images/animatedwomanwithballoons.jpg") no-repeat right top;
+    background: #ffffff url("../images/knitting.jpg") no-repeat right top;
     /*background-image: url("../images/girlredballoon.jpg");
     background-size: cover;*/
 }
 
 .colleaguepage {
-    background: #ffffff url("../images/animatedwomanwithballoons.jpg") no-repeat right top;
+    background: #ffffff url("../images/guyinoffice.png") no-repeat right top;
 }
 
 .couplespage {
-    background: #ffffff url("../images/animatedwomanwithballoons.jpg") no-repeat right top;
+    background: #ffffff url("../images/champagne.jpg") no-repeat right top;
 }
 
 .datepage {
@@ -26,7 +26,7 @@ body {
 }
 
 .friendspage {
-    background: #ffffff url("../images/animatedwomanwithballoons.jpg") no-repeat right top;
+    background: #ffffff url("../images/guybeer.png") no-repeat right top;
 }
 
 /*.otherpages {
