@@ -1,15 +1,13 @@
 <html>
 <head>
     <title>Chill Night Out</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     
 </head>
-
-<body>
+<body onLoad="setArrayChillNight();">
         <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="#">Night Out</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +40,11 @@
                 </div>
             </nav>
             <br>
-
+    <form data-alert="You must provide:" action="" method="post">
+        <input type="text" id="city" data-alert="City Name" placeholder="Enter City Here" />
+        <input type="text" id="state" data-alert="State Name" placeholder="Enter State Here" />
+        <input type="submit" value="Submit" />
+    </form>
     <input type="button" value="spin" style="float:left;" id='spin' />
     <canvas id="canvas" width="500" height="500"></canvas>
     <div id="results"></div>

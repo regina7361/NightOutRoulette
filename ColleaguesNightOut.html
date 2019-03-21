@@ -1,15 +1,13 @@
 <html>
 <head>
-    <title>Colleagues Night Out</title>
-
+    <title>Chill Night Out</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     
 </head>
-
-<body>
+<body onLoad="setArrayColleaugeNight();">
         <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="#">Night Out</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,8 +24,8 @@
                     <li class="nav-item">
                       <a class="nav-link" href="FriendsNightOut.html">Friends</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="ChillNightOut.html">Chill</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="ChillNightOut.html">Chill<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="CouplesNightOut.html">Couples</a>
@@ -35,17 +33,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="DateNightOut.html">Date</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="ColleaguesNightOut.html">Colleagues<span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ColleaguesNightOut.html">Colleagues</a>
                     </li>
                   </ul>
                 </div>
             </nav>
             <br>
-
+    <form data-alert="You must provide:" action="" method="post">
+        <input type="text" id="one" data-alert="City Name" placeholder="Enter City Here" />
+        <input type="text" id="two" data-alert="State Name" placeholder="Enter State Here" />
+        <input type="submit" value="Submit" />
+    </form>
     <input type="button" value="spin" style="float:left;" id='spin' />
     <canvas id="canvas" width="500" height="500"></canvas>
-
+    <div id="results"></div>
     <script src="assets/js/roulette.js"></script>
 </body>
 </html>
