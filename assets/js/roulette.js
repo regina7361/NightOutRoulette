@@ -23,10 +23,10 @@ function setArrayCouplesNight(){
 }
 function setArrayDateNight(){
   console.log("YOU ARE IN THE date night");
-  options=["pizza and beer","bowling","play pool","axe throwing","esacpe rooms","aracdes","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
+  options=["pizza and beer","bowling","play pool","axe throwing","coffee shop","aracdes","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
 }
 //---------------------------------------------------------------------------------------------VARIABLES
-var options = ["Magic", "Wonder", "WooooW", "Sunshine", "Spiders", "Watermellon", ":P", "LOOOOLLLAAA", "1000%", "karaoke"];
+var options = ["quiet restaurant","wine bar", "play pool", "coffee shop", "sip and paint", "axe throwing", "hooka bar", "tabletop games", "drive inn"];
 var resultName;
 var resultImageURL;
 var resultAddressLine1;
@@ -37,6 +37,7 @@ var resultURL;
 var resulttext;
 var cityName;
 var stateName;
+var string;
 ////////////////////////////////////////////////////////ROULETTE CODE//////////////////////////////////
 var startAngle = 0;
 var arc = Math.PI / (options.length / 2);
@@ -160,14 +161,20 @@ function stopRotateWheel() {
   ctx.save();
   ctx.font = 'bold 30px Helvetica, Arial';
   var text = options[index];
+  string=text;
   ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
   ctx.restore();
   ////////////////////////////////////////////////////////OUR CODE//////////////////////////////////////////
   //---------------------------------------------------------------------------------------------VARIABLES
-  var city= "riverside"+",";
-  var state="ca";
   var area="location=" + cityName+stateName;
-  var term="term="+ text;
+  
+  stringLength=string.length;
+      console.log(stringLength);
+  for (i=0; i<stringLength;i++){
+    string=string.replace(" ","_");
+  }
+  console.log(string);
+  var term="term="+ string;
   //---------------------------------------------------------------------------------------------AJAX CALL
   queryURL = "https://yelp-test-beast-coders.herokuapp.com/business/search/" + area + "&" + term;
   var apiKey="OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0mU70rj0KZ0ptxv3vE2wqUMCt2ID_wjXTFF1Tamrd6ASEdFJM5p1v2LCCHXHYx"
@@ -228,9 +235,7 @@ function displayResults(results){
 $('form').on('submit', function (event) {
   event.preventDefault();
   cityName=$("#city").val();
-      console.log(cityName);
   stateName=$("#state").val();
-      console.log(stateName);
   var thisForm = $(this);
   var thisAlert = thisForm.data('alert');
   var canSubmit = true;
@@ -246,15 +251,3 @@ $('form').on('submit', function (event) {
       return false;
   }
 });
-
-// function buttonState(){
-//   $("input").each(function(){
-//       $('#spin').attr('disabled', 'disabled');
-//       if($(this).val() == "" ) return false;
-//       else{$('#spin').attr('disabled', '');}
-//   })
-// }
-// $(function(){
-//   $('#spin').attr('disabled', 'disabled');
-//   $('input').change(buttonState);
-// })

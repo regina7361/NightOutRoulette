@@ -41,8 +41,10 @@
             </nav>
             <br>
     <form data-alert="You must provide:" action="" method="post">
-        <input type="text" id="city" data-alert="City Name" placeholder="Enter City Here" />
-        <input type="text" id="state" data-alert="State Name" placeholder="Enter State Here" />
+        <input type="text" id="city" data-alert="City Name" placeholder="Enter City Here" onkeypress="return (event.charCode > 64 && 
+        event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"/>
+        <input type="text" id="state" data-alert="State Name" placeholder="Enter State Here" onkeypress="return (event.charCode > 64 && 
+        event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"/>
         <input type="submit" value="Submit" />
     </form>
     <input type="button" value="spin" style="float:left;" id='spin' />
