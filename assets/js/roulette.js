@@ -1,5 +1,31 @@
 ////////////////////////////////////////////////////////OUR VARIABLES AND ARRAYS//////////////////////////////////
-var options = ["movies", "pizza night", "drive-in", "swapmeet", "mini-golf", "roller skating", "ice cream", "arcades", "amusement park", "karaoke"];
+//---------------------------------------------------------------------------------------------changing arrays
+function setArrayChillNight(){
+  console.log("YOU ARE IN THE Chill Night");
+  options=["quiet restaurant","wine bar", "play pool", "coffee shop", "sip and paint", "axe throwing", "hooka bar", "tabletop games", "drive inn"];
+}
+function setArrayFamilyNight(){
+  console.log("YOU ARE IN THE family night");
+  options=["moives","pizza night","drive in","swap meet","roller skating","mini golf","ice cream","arcades","amusement park","karaoke"];
+}
+function setArrayFriendsNight(){
+  console.log("YOU ARE IN THE friends night");
+  options=["pizza and beer","bowling","play pool","axe throwing","esacpe rooms","aracdes","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
+}
+function setArrayColleaugeNight(){
+  console.log("YOU ARE IN THE colleagues night");
+  options=["escape room","paint and sip","go-karts","arcade","brewery","winery","lazer tag","sushi","dinner and drinks","happy hour","axe throwing"];
+}
+function setArrayCouplesNight(){
+  console.log("YOU ARE IN THE couples night");
+  options=["pizza and beer","bowling","play pool","axe throwing","esacpe rooms","aracdes","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
+}
+function setArrayDateNight(){
+  console.log("YOU ARE IN THE date night");
+  options=["pizza and beer","bowling","play pool","axe throwing","coffee shop","aracdes","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
+}
+//---------------------------------------------------------------------------------------------VARIABLES
+var options = ["quiet restaurant","wine bar", "play pool", "coffee shop", "sip and paint", "axe throwing", "hooka bar", "tabletop games", "drive inn"];
 var resultName;
 var resultImageURL;
 var resultAddressLine1;
@@ -8,6 +34,9 @@ var resultPhone;
 var resultRating;
 var resultURL;
 var resulttext;
+var cityName;
+var stateName;
+var string;
 ////////////////////////////////////////////////////////ROULETTE CODE//////////////////////////////////
 var startAngle = 0;
 var arc = Math.PI / (options.length / 2);
@@ -19,7 +48,13 @@ var spinTimeTotal = 0;
 var placeholder;
 var ctx;
 
-document.getElementById("spin").addEventListener("click", spin);
+
+
+document.getElementById("spin").addEventListener("click", function (event){
+  event.preventDefault();
+  
+  spin();
+});
 
 function byte2Hex(n) {
   var nybHexString = "0123456789ABCDEF";
@@ -127,15 +162,21 @@ function stopRotateWheel() {
   var index = Math.floor((360 - degrees % 360) / arcd);
   ctx.save();
   ctx.font = 'bold 30px Helvetica, Arial';/////////////////////Font style of the results that appear in the middle of wheel
-  var text = options[index]
+  var text = options[index];
+  string=text;
   ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
   ctx.restore();
   ////////////////////////////////////////////////////////OUR CODE//////////////////////////////////////////
   //---------------------------------------------------------------------------------------------VARIABLES
-  var city= "riverside"+",";
-  var state="ca";
-  var area="location=" + city+state;
-  var term="term="+ text;
+  var area="location=" + cityName+stateName;
+  
+  stringLength=string.length;
+      console.log(stringLength);
+  for (i=0; i<stringLength;i++){
+    string=string.replace(" ","_");
+  }
+  console.log(string);
+  var term="term="+ string;
   //---------------------------------------------------------------------------------------------AJAX CALL
   queryURL = "https://yelp-test-beast-coders.herokuapp.com/business/search/" + area + "&" + term;
   var apiKey="OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0mU70rj0KZ0ptxv3vE2wqUMCt2ID_wjXTFF1Tamrd6ASEdFJM5p1v2LCCHXHYx"
@@ -150,6 +191,7 @@ function stopRotateWheel() {
       dataType: 'json',
     })
     .then(function(response){
+      console.log(queryURL);
       displayResults(response);
     }); 
 }
@@ -164,7 +206,6 @@ drawRouletteWheel();
 //---------------------------------------------------------------------------------------------DISPLAY RESULTS
 function displayResults(results){
   $("#results").empty();
- console.log("YOU ARE IN DISPLAY RESULTS", results);
  resulttext=$("<p>").text("HERE ARE YOUR RESULTS");
     $("#results").append(resulttext);
  for (i=0; i<5; i++){
@@ -177,7 +218,7 @@ function displayResults(results){
       resulttext=$("<p>").text("Address: "+resultAddressLine1);
       $("#results").append(resulttext);
     resultAddressLine2=results.businesses[i].location.display_address[1];
-      resulttext=$("<p>").text("Address: "+resultAddressLine2);
+      resulttext=$("<p>").text(resultAddressLine2);
       $("#results").append(resulttext);
     resultPhone=results.businesses[i].phone;
       resulttext=$("<p>").text("Phone Number: "+resultPhone);
@@ -192,3 +233,23 @@ function displayResults(results){
       $("#results").append(resulttext);
  };
 }
+//---------------------------------------------------------------------------------------------LOCATION FORM
+$('form').on('submit', function (event) {
+  event.preventDefault();
+  cityName=$("#city").val();
+  stateName=$("#state").val();
+  var thisForm = $(this);
+  var thisAlert = thisForm.data('alert');
+  var canSubmit = true;
+  thisForm.find('input[type=text]').each(function(i) {
+      var thisInput = $(this);
+      if ( !$.trim(thisInput.val()) ) {
+          thisAlert += '\n' + thisInput.data('alert');
+          canSubmit = false;
+      };
+  });
+  if( !canSubmit ) {
+      alert( thisAlert );
+      return false;
+  }
+});
