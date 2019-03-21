@@ -1,6 +1,14 @@
-//Family Night Out Options:
-var options = ["Movies", "Pizza \nNight", "Drive-in Theater", "Night Swapmeet", "RollerSkating", "Mini golf", "Ice Cream", "Arcades", "Amusement Park", "Karaoke"];
-
+////////////////////////////////////////////////////////OUR VARIABLES AND ARRAYS//////////////////////////////////
+var options = ["movies", "pizza night", "drive-in", "swapmeet", "mini-golf", "roller skating", "ice cream", "arcades", "amusement park", "karaoke"];
+var resultName;
+var resultImageURL;
+var resultAddressLine1;
+var resultAddressLine2;
+var resultPhone;
+var resultRating;
+var resultURL;
+var resulttext;
+////////////////////////////////////////////////////////ROULETTE CODE//////////////////////////////////
 var startAngle = 0;
 var arc = Math.PI / (options.length / 2);
 var spinTimeout = null;
@@ -8,7 +16,7 @@ var spinTimeout = null;
 var spinArcStart = 10;
 var spinTime = 0;
 var spinTimeTotal = 0;
-
+var placeholder;
 var ctx;
 
 document.getElementById("spin").addEventListener("click", spin);
@@ -23,14 +31,17 @@ function RGB2Color(r,g,b) {
 }
 
 function getColor(item, maxitem) {
-  var phase = 0;////////////These affect the hue and stuff like that of the colors in the wheel
-  var center = 128;////////
-  var width = 127;/////////
+  var phase = 0;////////////0These affect the hue and stuff like that of the colors in the wheel
+  var center = 128;////////128
+  //var width = 200;/////////127
   var frequency = Math.PI*2/maxitem;
   
-  red   = Math.sin(frequency*item+2+phase) * width + center;//The 2, 0, and 4 affect the colors of the wheel
-  green = Math.sin(frequency*item+0+phase) * width + center;//
-  blue  = Math.sin(frequency*item+4+phase) * width + center;//
+  //red   = Math.sin(frequency*item+2+phase) * width + center;//The 2, 0, and 4 affect the colors of the wheel
+  //green = Math.sin(frequency*item+2+phase) * width + center;//
+  //blue  = Math.sin(frequency*item+1+phase) * width + center;//
+  red   = Math.sin(frequency*item+2+phase) * center;//The 2, 0, and 4 affect the colors of the wheel
+  green = Math.sin(frequency*item+0+phase) * center;//
+  blue  = Math.sin(frequency*item+4+phase) * center;//
   
   return RGB2Color(red,green,blue);
 }
@@ -45,7 +56,7 @@ function drawRouletteWheel() {
     ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,500,500);
 
-    ctx.strokeStyle = "grey";//////////This is the color of the Outline
+    ctx.strokeStyle = "black";//////////This is the color of the Outline
     ctx.lineWidth = 5;////////////////This is the width of the outside,inside and one line of the radius.
 
     ctx.font = 'bold 12px Helvetica, Arial';///////This is the style for the font in the wheel
@@ -62,11 +73,11 @@ function drawRouletteWheel() {
       ctx.fill();
 
       ctx.save();
-      ctx.shadowOffsetX = -1;
-      ctx.shadowOffsetY = -1;
-      ctx.shadowBlur    = 0; /////////////////////////////////////This affects how sparse the shadow is. So the more negative the number the bolder it will become.
-      ctx.shadowColor   = "rgb(220,220,220)"; ////////////////////This is the shadow color of the fonts in the wheel.
-      ctx.fillStyle = "black";///////////////////////////////////font in wheel color.
+      //ctx.shadowOffsetX = -1;
+      //ctx.shadowOffsetY = -1;
+      //ctx.shadowBlur    = 20; /////////////////////////////////////use to be 0This affects how sparse the shadow is. So the more negative the number the bolder it will become.
+      //ctx.shadowColor   = "rgb(220,220,220)"; ////////////////////This is the shadow color of the fonts in the wheel.
+      ctx.fillStyle = "white";///////////////////////////////////font in wheel color.
       ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 
                     250 + Math.sin(angle + arc / 2) * textRadius);
       ctx.rotate(angle + arc / 2 + Math.PI / 2);
@@ -74,9 +85,9 @@ function drawRouletteWheel() {
       ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
       ctx.restore();
     } 
-
+    
     //Arrow
-    ctx.fillStyle = "rgb(146, 146, 146)";///////////Arrow color
+    ctx.fillStyle = "white";///////////Arrow color
     ctx.beginPath();
     ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
     ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
@@ -119,6 +130,28 @@ function stopRotateWheel() {
   var text = options[index]
   ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
   ctx.restore();
+  ////////////////////////////////////////////////////////OUR CODE//////////////////////////////////////////
+  //---------------------------------------------------------------------------------------------VARIABLES
+  var city= "riverside"+",";
+  var state="ca";
+  var area="location=" + city+state;
+  var term="term="+ text;
+  //---------------------------------------------------------------------------------------------AJAX CALL
+  queryURL = "https://yelp-test-beast-coders.herokuapp.com/business/search/" + area + "&" + term;
+  var apiKey="OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0mU70rj0KZ0ptxv3vE2wqUMCt2ID_wjXTFF1Tamrd6ASEdFJM5p1v2LCCHXHYx"
+    $.ajax({
+      url: queryURL,
+      dataType: 'json',
+      contentType: 'json',
+      headers: {
+        'Authorization':'Bearer OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0mU70rj0KZ0ptxv3vE2wqUMCt2ID_wjXTFF1Tamrd6ASEdFJM5p1v2LCCHXHYx',
+    },
+      method: 'GET',
+      dataType: 'json',
+    })
+    .then(function(response){
+      displayResults(response);
+    }); 
 }
 
 function easeOut(t, b, c, d) {
@@ -128,3 +161,34 @@ function easeOut(t, b, c, d) {
 }
 
 drawRouletteWheel();
+//---------------------------------------------------------------------------------------------DISPLAY RESULTS
+function displayResults(results){
+  $("#results").empty();
+ console.log("YOU ARE IN DISPLAY RESULTS", results);
+ resulttext=$("<p>").text("HERE ARE YOUR RESULTS");
+    $("#results").append(resulttext);
+ for (i=0; i<5; i++){
+      resulttext=$("<p>").text("OPTION "+(i+1));
+      $("#results").append(resulttext);
+    resultName=results.businesses[i].name;
+      resulttext=$("<p>").text("Name of the place: "+resultName);
+      $("#results").append(resulttext);
+    resultAddressLine1=results.businesses[i].location.display_address[0];
+      resulttext=$("<p>").text("Address: "+resultAddressLine1);
+      $("#results").append(resulttext);
+    resultAddressLine2=results.businesses[i].location.display_address[1];
+      resulttext=$("<p>").text("Address: "+resultAddressLine2);
+      $("#results").append(resulttext);
+    resultPhone=results.businesses[i].phone;
+      resulttext=$("<p>").text("Phone Number: "+resultPhone);
+      $("#results").append(resulttext);
+    resultRating=results.businesses[i].rating;
+      resulttext=$("<p>").text("Rating: "+resultRating+"/5");
+      $("#results").append(resulttext);
+    resultURL=results.businesses[i].url;
+      resulttext=$("<p>").text("Link to their website: "+resultURL);
+      $("#results").append(resulttext);
+      resulttext=$("<p>").text("");
+      $("#results").append(resulttext);
+ };
+}
