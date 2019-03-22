@@ -10,7 +10,7 @@ function setArrayFamilyNight(){
 }
 function setArrayFriendsNight(){
   console.log("YOU ARE IN THE friends night");
-  options=["pizza and beer","bowling","play pool","axe throwing","esacpe rooms","aracdes","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
+  options=["pizza and beer","bowling","play pool","axe throwing","escape rooms","arcades","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
 }
 function setArrayColleaugeNight(){
   console.log("YOU ARE IN THE colleagues night");
@@ -18,7 +18,7 @@ function setArrayColleaugeNight(){
 }
 function setArrayCouplesNight(){
   console.log("YOU ARE IN THE couples night");
-  options=["pizza and beer","bowling","play pool","axe throwing","esacpe rooms","aracdes","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
+  options=["pizza and beer","bowling","play pool","axe throwing","escape rooms","arcades","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
 }
 function setArrayDateNight(){
   console.log("YOU ARE IN THE date night");
@@ -90,11 +90,14 @@ function drawRouletteWheel() {
 
     ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,500,500);
-
+    ctx.shadowOffsetX = -3;/////added this for shadow on the wheel before the spin
+    ctx.shadowOffsetY = 3;
+    ctx.shadowBlur    = 2; 
+    ctx.shadowColor   = "rgb(65, 64, 64)";
     ctx.strokeStyle = "black";//////////This is the color of the Outline
     ctx.lineWidth = 5;////////////////This is the width of the outside,inside and one line of the radius.
 
-    ctx.font = 'bold 12px Helvetica, Arial';///////This is the style for the font in the wheel
+    ctx.font = 'small-caps normal 14px Helvetica, Arial';///////This is the style for the font in the wheel
 
     for(var i = 0; i < options.length; i++) {
       var angle = startAngle + i * arc;
@@ -122,7 +125,11 @@ function drawRouletteWheel() {
     } 
     
     //Arrow
-    ctx.fillStyle = "#85275b";///////////Arrow color
+    ctx.shadowOffsetX = -3;
+    ctx.shadowOffsetY = 3;
+    ctx.shadowBlur    = 2; 
+    ctx.shadowColor   = "rgb(65, 64, 64)";
+    ctx.fillStyle = "rgb(250, 125, 120)";///////////Arrow color
     ctx.beginPath();
     ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
     ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
