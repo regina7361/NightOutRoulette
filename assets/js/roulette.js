@@ -122,7 +122,7 @@ function drawRouletteWheel() {
     } 
     
     //Arrow
-    ctx.fillStyle = "white";///////////Arrow color
+    ctx.fillStyle = "#85275b";///////////Arrow color
     ctx.beginPath();
     ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
     ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
@@ -162,7 +162,7 @@ function stopRotateWheel() {
   var index = Math.floor((360 - degrees % 360) / arcd);
   ctx.save();
   ctx.font = 'bold 30px Helvetica, Arial';/////////////////////Font style of the results that appear in the middle of wheel
-  var text = options[index]
+  var text = options[index];
   string=text;
   ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
   ctx.restore();
