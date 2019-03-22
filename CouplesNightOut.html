@@ -42,23 +42,38 @@
             </nav>
             <br>
 
-                             <!-- Merged STUFF -->
-   <div class="row">
-       <div class="col-6">
-          <form data-alert="You must provide:" action="" method="post">
-              <input type="text" id="one" data-alert="City Name" placeholder="Enter City Here" />
-              <input type="text" id="two" data-alert="State Name" placeholder="Enter State Here" />
-              <input type="submit" value="Submit" />
-          </form>
-         <input type="button" class="btn btn-secondary" value="spin" style="float:left;" id='spin' />
-         <canvas id="canvas" width="500" height="500"></canvas>
-         <!--style="width:600px;"-->
-       </div>
-   <div class="results col-6">
-   <div id="results"></div>
+                          <!-- Merged STUFF -->
+<div class="row">
+<!----------------------------------------------------Input Group------------------------------------------------------>
+    <div class="col-2" style="margin-left: 30px;"> 
+        <form data-alert="You must provide:" action="" method="post">
+            <div class="form-group">
+                <label for="CityName">City</label>
+                <input type="text" class="form-control" id="one" data-alert="City Name" placeholder="Ex: Redlands" />
+            </div>
+            <div class="form-group">
+                <label for="StateName">State</label>
+                <input type="text" class="form-control" id="two" data-alert="State Name" placeholder="Ex: California" />
+            </div>
+<!-------------------------------------------------------Buttons-------------------------------------------------------->            
+                <input type="submit" class="btn btn-secondary" value="Submit" />
+                <input type="button" class="btn btn-secondary" value="spin" id='spin' />
+        </form>
+    </div>
+<!--------------------------------------------------------Wheel---------------------------------------------------------->
+    <div class="col-5" style="padding-left: 0px;">     
+                <canvas id="canvas" width="500" height="500"></canvas>
+    </div>
+   
+<!--------------------------------------------------------Results Box---------------------------------------------------->       
+   <div class="results col-5">
+            <div id="results"></div>
    </div>
-   </div>
-    <script src="assets/js/roulette.js"></script>
+</div>
+
+<!--Javascript link-->
+      <script src="assets/js/roulette.js"></script>
+      
 </body>
 </html>
 <!--my old code            

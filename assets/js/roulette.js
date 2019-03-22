@@ -122,7 +122,7 @@ function drawRouletteWheel() {
     } 
     
     //Arrow
-    ctx.fillStyle = "white";///////////Arrow color
+    ctx.fillStyle = "#85275b";///////////Arrow color
     ctx.beginPath();
     ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
     ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
