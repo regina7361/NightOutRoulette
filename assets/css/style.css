@@ -27,6 +27,10 @@
     background-size: 45%;
 }
 /*-----------------------------------------------Navigation Bar----------------------------------------------------*/
+/*.container {
+    width: 100%;
+}*/
+
 nav {
     border-bottom: 1px solid rgb(173, 172, 172);
 }
@@ -64,12 +68,12 @@ nav {
 
 
 /*------------------------------------------------Index styling------------------------------------------------------*/
-.container {
+/*.container {
     width: 100%;
     max-width: 960px;
     margin: 0 auto;
     clear: both;
-}
+}*/
 h1, h2, h3 {
     font-family: 'Georgia', Georgia, 'Times New Roman', Times, serif;
     font-weight: 700;
@@ -184,9 +188,11 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
-    .canvas, .wheelspin
+    #canvas, .wheelspin
     {
         display: inline-block;
-        margin-left: 50px;
+        margin-left: 15px;
+        margin-right: 10px;
+        width: 100%;
     }
 }
