@@ -155,7 +155,9 @@ h1 {
 
 
  #results {
-     padding: 20px;
+     padding: 30px;
+     font-family: Arial, Helvetica, sans-serif;
+     color: navy;
  }
 
  #displayBelow {
@@ -178,5 +180,13 @@ h1 {
     .couplespage, .colleaguepage, .chillpage, .datepage, .familypage, .friendspage
     {
         background: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .canvas, .wheelspin
+    {
+        display: inline-block;
+        margin-left: 50px;
     }
 }
