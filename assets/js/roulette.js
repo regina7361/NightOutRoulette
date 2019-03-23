@@ -1,31 +1,25 @@
 ////////////////////////////////////////////////////////OUR VARIABLES AND ARRAYS//////////////////////////////////
 //---------------------------------------------------------------------------------------------changing arrays
 function setArrayChillNight(){
-  console.log("YOU ARE IN THE Chill Night");
-  options=["quiet restaurant","wine bar", "play pool", "coffee shop", "sip and paint", "axe throwing", "hooka bar", "tabletop games", "drive inn"];
+  options=["quiet restaurant","wine bar", "play pool", "coffee shop", "sip and paint", "axe throwing", "hooka bar", "tabletop games", "drive in"];
 }
 function setArrayFamilyNight(){
-  console.log("YOU ARE IN THE family night");
-  options=["moives","pizza night","drive in","swap meet","roller skating","mini golf","ice cream","arcades","amusement park","karaoke"];
+  options=["movies","pizza night","swap meet","roller skating","mini golf","ice cream","arcades","amusement park","karaoke"];
 }
 function setArrayFriendsNight(){
-  console.log("YOU ARE IN THE friends night");
-  options=["pizza and beer","bowling","play pool","axe throwing","escape rooms","arcades","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
+  options=["bowling","escape rooms","arcades","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
 }
 function setArrayColleaugeNight(){
-  console.log("YOU ARE IN THE colleagues night");
-  options=["escape room","paint and sip","go-karts","arcade","brewery","winery","lazer tag","sushi","dinner and drinks","happy hour","axe throwing"];
+  options=["paint and sip","arcades","brewery","winery","lazer tag","sushi","dinner and drinks","happy hour","axe throwing"];
 }
 function setArrayCouplesNight(){
-  console.log("YOU ARE IN THE couples night");
-  options=["pizza and beer","bowling","play pool","axe throwing","escape rooms","arcades","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
+  options=["pizza and beer","bowling","escape rooms","arcades","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
 }
 function setArrayDateNight(){
-  console.log("YOU ARE IN THE date night");
-  options=["pizza and beer","bowling","play pool","axe throwing","coffee shop","aracdes","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
+  options=["bowling","axe throwing","coffee shop","arcades","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
 }
 //---------------------------------------------------------------------------------------------VARIABLES
-var options = ["quiet restaurant","wine bar", "play pool", "coffee shop", "sip and paint", "axe throwing", "hooka bar", "tabletop games", "drive inn"];
+var options = ["  ","  ", "  ", "  ", "  ", "  ", "  ", "  ", "  "];
 var resultName;
 var resultImageURL;
 var resultAddressLine1;
@@ -37,6 +31,8 @@ var resulttext;
 var cityName;
 var stateName;
 var string;
+var text;
+var resultsDisplayed;
 ////////////////////////////////////////////////////////ROULETTE CODE//////////////////////////////////
 var startAngle = 0;
 var arc = Math.PI / (options.length / 2);
@@ -62,7 +58,7 @@ function byte2Hex(n) {
 }
 
 function RGB2Color(r,g,b) {
-	return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
+    return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
 }
 
 function getColor(item, maxitem) {
@@ -92,7 +88,7 @@ function drawRouletteWheel() {
     ctx.clearRect(0,0,500,500);
     ctx.shadowOffsetX = -3;/////added this for shadow on the wheel before the spin
     ctx.shadowOffsetY = 3;
-    ctx.shadowBlur    = 2; 
+    ctx.shadowBlur    = 2;
     ctx.shadowColor   = "rgb(65, 64, 64)";
     ctx.strokeStyle = "black";//////////This is the color of the Outline
     ctx.lineWidth = 5;////////////////This is the width of the outside,inside and one line of the radius.
@@ -129,7 +125,7 @@ function drawRouletteWheel() {
     ctx.shadowOffsetY = 3;
     ctx.shadowBlur    = 2; 
     ctx.shadowColor   = "rgb(65, 64, 64)";
-    ctx.fillStyle = "rgb(250, 125, 120)";///////////Arrow color
+    ctx.fillStyle = "red";///////////Arrow color
     ctx.beginPath();
     ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
     ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
@@ -169,7 +165,7 @@ function stopRotateWheel() {
   var index = Math.floor((360 - degrees % 360) / arcd);
   ctx.save();
   ctx.font = 'bold 30px Helvetica, Arial';/////////////////////Font style of the results that appear in the middle of wheel
-  var text = options[index];
+  text = options[index];
   string=text;
   ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
   ctx.restore();
@@ -178,15 +174,12 @@ function stopRotateWheel() {
   var area="location=" + cityName+stateName;
   
   stringLength=string.length;
-      console.log(stringLength);
   for (i=0; i<stringLength;i++){
     string=string.replace(" ","_");
   }
-  console.log(string);
   var term="term="+ string;
   //---------------------------------------------------------------------------------------------AJAX CALL
   queryURL = "https://yelp-test-beast-coders.herokuapp.com/business/search/" + area + "&" + term;
-  var apiKey="OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0mU70rj0KZ0ptxv3vE2wqUMCt2ID_wjXTFF1Tamrd6ASEdFJM5p1v2LCCHXHYx"
     $.ajax({
       url: queryURL,
       dataType: 'json',
@@ -198,7 +191,6 @@ function stopRotateWheel() {
       dataType: 'json',
     })
     .then(function(response){
-      console.log(queryURL);
       displayResults(response);
     }); 
 }
@@ -212,10 +204,17 @@ function easeOut(t, b, c, d) {
 drawRouletteWheel();
 //---------------------------------------------------------------------------------------------DISPLAY RESULTS
 function displayResults(results){
+  $("#displayBelow").empty();
+  resulttext=$("<p>").text("RESULTS BELOW!");
+      $("#displayBelow").append(resulttext);
   $("#results").empty();
- resulttext=$("<p>").text("HERE ARE YOUR RESULTS");
-    $("#results").append(resulttext);
- for (i=0; i<5; i++){
+//
+  if(results.businesses.length==0){
+      resulttext=$("<p>").text("Oops! It seems like there is nothing for "+ text+" in your area. Let's spin again.");
+      $("#results").append(resulttext);
+  }
+  else if (results.businesses.length<5){
+      for (i=0; i<results.businesses.length; i++){
       resulttext=$("<p>").text("OPTION "+(i+1));
       $("#results").append(resulttext);
     resultName=results.businesses[i].name;
@@ -238,7 +237,34 @@ function displayResults(results){
       $("#results").append(resulttext);
       resulttext=$("<p>").text("");
       $("#results").append(resulttext);
- };
+      }
+  }
+  else{
+      for (i=0; i<5; i++){
+      resulttext=$("<p>").text("OPTION "+(i+1));
+      $("#results").append(resulttext);
+    resultName=results.businesses[i].name;
+      resulttext=$("<p>").text("Name of the place: "+resultName);
+      $("#results").append(resulttext);
+    resultAddressLine1=results.businesses[i].location.display_address[0];
+      resulttext=$("<p>").text("Address: "+resultAddressLine1);
+      $("#results").append(resulttext);
+    resultAddressLine2=results.businesses[i].location.display_address[1];
+      resulttext=$("<p>").text(resultAddressLine2);
+      $("#results").append(resulttext);
+    resultPhone=results.businesses[i].phone;
+      resulttext=$("<p>").text("Phone Number: "+resultPhone);
+      $("#results").append(resulttext);
+    resultRating=results.businesses[i].rating;
+      resulttext=$("<p>").text("Rating: "+resultRating+"/5");
+      $("#results").append(resulttext);
+    resultURL=results.businesses[i].url;
+      resulttext=$("<p>").text("Link to their website: "+resultURL);
+      $("#results").append(resulttext);
+      resulttext=$("<p>").text("");
+      $("#results").append(resulttext);
+  }
+};
 }
 //---------------------------------------------------------------------------------------------LOCATION FORM
 $('form').on('submit', function (event) {
