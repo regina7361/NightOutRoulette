@@ -17,4 +17,4 @@ Potentional additions:
 1. Add Lyft API pricing and time to get to location
 2. Add Fandango API for list of movie showings
 
-![alt text](https://github.com/regina7361/NightOutRoulette/blob/master/assets/images/Screen%20Shot%202019-03-11%20at%208.41.00%20PM.png)
+![alt text](assets/images/Screen Shot 2019-03-22 at 8.07.28 PM.png)

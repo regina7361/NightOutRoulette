@@ -4,7 +4,7 @@ function setArrayChillNight(){
   options=["quiet restaurant","wine bar", "play pool", "coffee shop", "sip and paint", "axe throwing", "hooka bar", "tabletop games", "drive in"];
 }
 function setArrayFamilyNight(){
-  options=["moives","pizza night","swap meet","roller skating","mini golf","ice cream","arcades","amusement park","karaoke"];
+  options=["movies","pizza night","swap meet","roller skating","mini golf","ice cream","arcades","amusement park","karaoke"];
 }
 function setArrayFriendsNight(){
   options=["bowling","escape rooms","arcades","clubbing","sip and paint","karaoke","dueling piano bar","bar hopping","dance lessons"];
