@@ -1,10 +1,10 @@
 # NightOutRoulette
 
 Contributors:
-Devanshi Mathur
-Lupe De Alba
-Brandon White
-Regina Garcia
+1. Devanshi Mathur
+2. Lupe De Alba
+3. Brandon White
+4. Regina Garcia
 
 Night Out Roulette will allow the user to select from a list of categories -
 1. Family Night Out
