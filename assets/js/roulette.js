@@ -180,7 +180,6 @@ function stopRotateWheel() {
   var term="term="+ string;
   //---------------------------------------------------------------------------------------------AJAX CALL
   queryURL = "https://yelp-test-beast-coders.herokuapp.com/business/search/" + area + "&" + term;
-  var apiKey="OZpDFQVOqnln_GHOPgCydUdo3Ce1IzKxvdzL7qXezxZhjATA2kC3Kw72LE_Vntan_m0mU70rj0KZ0ptxv3vE2wqUMCt2ID_wjXTFF1Tamrd6ASEdFJM5p1v2LCCHXHYx"
     $.ajax({
       url: queryURL,
       dataType: 'json',
