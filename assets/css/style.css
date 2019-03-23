@@ -174,3 +174,9 @@ h1 {
     100%{   color:red;    }
 }
  
+@media screen and (max-width: 768px) {
+    .couplespage, .colleaguepage, .chillpage, .datepage, .familypage, .friendspage
+    {
+        background: none;
+    }
+}
