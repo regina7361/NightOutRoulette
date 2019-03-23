@@ -136,13 +136,16 @@ h1 {
 }
 .card-title {
     margin-bottom: 5%;
+    height: 20%;
 }
 .footer-container {
     width: 100%;
     margin: 0 auto;
-    clear: both;
     background: gainsboro;
     text-align: center;
+    position: fixed;
+    bottom: 0;
+
 }
 
 .resultsRoulette {
@@ -152,7 +155,9 @@ h1 {
 
 
  #results {
-     padding: 20px;
+     padding: 30px;
+     font-family: Arial, Helvetica, sans-serif;
+     color: navy;
  }
 
  #displayBelow {
@@ -171,3 +176,17 @@ h1 {
     100%{   color:red;    }
 }
  
+@media screen and (max-width: 768px) {
+    .couplespage, .colleaguepage, .chillpage, .datepage, .familypage, .friendspage
+    {
+        background: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .canvas, .wheelspin
+    {
+        display: inline-block;
+        margin-left: 50px;
+    }
+}
